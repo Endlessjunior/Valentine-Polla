@@ -1,74 +1,224 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🐰💖</title>
+
+<style>
+/* ===== Base ===== */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  background:linear-gradient(135deg,#ffd6e7,#ffeef6,#e8f7ff);
+  overflow-x:hidden;
+}
+.hidden{display:none}
+.container{max-width:720px;margin:0 auto;padding:24px}
+h1,h2{margin:12px 0}
+button{
+  padding:10px 16px;border:none;border-radius:14px;cursor:pointer;
+  background:#ff7fb2;color:#fff;font-weight:600
+}
+button.secondary{background:#fff;color:#ff7fb2;border:1px solid #ff7fb2}
+
+/* ===== Intro / Password Screens ===== */
+#introScreen,#passwordScreen{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center
+}
+#guardian,#bunnyGuard{font-size:64px;margin-bottom:12px}
+#envelope{
+  position:relative;width:180px;height:120px;background:#ff9ec4;border-radius:12px;
+  cursor:pointer;transition:.3s
+}
+.flap{
+  position:absolute;top:-60px;left:0;width:180px;height:60px;background:#ff7fb2;
+  clip-path:polygon(0 100%,50% 0,100% 100%);transition:.5s;transform-origin:top
+}
+.letter{display:flex;justify-content:center;align-items:center;height:100%;font-size:44px}
+.open .flap{transform:rotateX(160deg)}
+input{padding:10px;border-radius:10px;border:1px solid #ccc;margin:8px 0}
+
+/* ===== Animations ===== */
+@keyframes shake{
+  0%{transform:translateX(0)}25%{transform:translateX(-10px)}
+  50%{transform:translateX(10px)}75%{transform:translateX(-10px)}
+  100%{transform:translateX(0)}
+}
+.shake{animation:shake .4s}
+@keyframes flash{
+  0%{background:#fff}50%{background:#ffd6e7}100%{background:#fff}
+}
+.successFlash{animation:flash .6s}
+
+/* ===== Sections from your content ===== */
+.chat,.phone{max-width:720px;margin:16px auto;padding:16px;border-radius:16px;background:#ffffffaa}
+.msg{background:#eee;padding:10px;margin:6px 0;border-radius:10px}
+.fox{text-align:right}
+#finalChoice{margin-top:12px}
+#bunnyEffect{max-width:720px;margin:24px auto;text-align:center}
+</style>
+</head>
+<body>
+
 <!-- ===== SUPER ENVELOPE INTRO ===== -->
 <div id="introScreen">
-
-<div id="guardian">🐰</div>
-
-<div id="envelope" onclick="openEnvelope()">
-<div class="flap"></div>
-<div class="letter">💌</div>
-</div>
-
-<p class="hint">มีจดหมายลับถึงคุณ... กดเปิดสิ 🦊</p>
-
+  <div id="guardian">🐰</div>
+  <div id="envelope" onclick="openEnvelope()">
+    <div class="flap"></div>
+    <div class="letter">💌</div>
+  </div>
+  <p class="hint">มีจดหมายลับถึงคุณ... กดเปิดสิ 🦊</p>
 </div>
 
 <!-- ===== PASSWORD SCREEN ===== -->
 <div id="passwordScreen" class="hidden">
-
-<div id="bunnyGuard">🐰</div>
-
-<h2>🔐 ใส่รหัสเข้าสู่ระบบ </h2>
-<input id="passwordInput" placeholder="รหัสลับ..." />
-<button onclick="checkPassword()">ตกลง 💖</button>
-
-<p id="errorText"></p>
-
+  <div id="bunnyGuard">🐰</div>
+  <h2>🔐 ใส่รหัสเข้าสู่ระบบ</h2>
+  <input id="passwordInput" placeholder="รหัสลับ..." />
+  <button onclick="checkPassword()">ตกลง 💖</button>
+  <p id="errorText" style="color:#d33"></p>
 </div>
 
-<!-- ===== MAIN WEBSITE WRAPPER ===== -->
+<!-- ===== MAIN WEBSITE WRAPPER (สำคัญ: เว็บทั้งหมดต้องอยู่ในนี้) ===== -->
 <div id="mainSite" class="hidden">
-<!-- 🔥 เอาเว็บวาเลนไทน์ทั้งหมดของจูเนียร์ใส่ไว้ในนี้ -->
-</div>
-<div class="container">
-<h1> ถึงพอลล่า 🐰</h1>
 
-<div id="dialogue">
-สวัสดีคุณ 🐰 วันนี้น้องมีอะไรอยากบอก...
-</div>
+  <div class="container">
+    <h1>ถึงพอลล่า 🐰</h1>
+    <div id="dialogue">สวัสดีคุณ 🐰 วันนี้น้องมีอะไรอยากบอก...</div>
+    <button onclick="nextStory()">ลองกดดูสิ ▶</button>
 
-<button onclick="nextStory()">ลองกดดูสิ ▶</button>
+    <div id="finalChoice" class="hidden">
+      <h2>เป็นแฟนกับน้องนะ 💖</h2>
+      <button onclick="accept()">ตกลง</button>
+      <button id="noBtn" class="secondary">ยังไม่ตกลง</button>
+    </div>
+  </div>
 
-<div id="finalChoice" class="hidden">
-<h2>เป็นแฟนกับน้องนะ 💖</h2>
-<button onclick="accept()">ตกลง</button>
-<button id="noBtn">ยังไม่ตกลง</button>
-</div>
-</div>
-<div class="chat">
-<div class="fox">🦊: คุณรู้ไหม...</div>
-<div class="bunny">🐰: ....?</div>
-<div class="fox">🦊: น้องชอบคุณนะ 💖</div>
+  <div class="chat">
+    <div class="msg fox">🦊: คุณรู้ไหม...</div>
+    <div class="msg">🐰: ....?</div>
+    <div class="msg fox">🦊: น้องชอบคุณนะ 💖</div>
+    <button onclick="love()">ตกลง</button>
+    <div id="result"></div>
+  </div>
 
-<button onclick="love()">ตกลง</button>
-<div id="result"></div>
-</div>
-<h1>เป็นแฟนกับน้องนะ 🌙💖</h1>
-<div class="phone">
-<div class="msg">🦊: วันนี้คุณว่างไหม</div>
-<div class="msg fox">🐰: ....? </div>
-<div class="msg">🦊: เป็นแฟนกันไหม 💖</div>
-<button onclick="ok()">ตกลง</button>
-</div>
-<div id="intro">🦊 Loading Love...</div>
-<div id="main" class="hidden">
-<h1>เป็นแฟนกับน้องนะ 💖</h1>
-<button onclick="boom()">ตกลง</button>
-</div>
-<!-- เอฟเฟกต์ดอกไม้ -->
-<div id="flower-container"></div>
+  <div class="phone">
+    <h1>เป็นแฟนกับน้องนะ 🌙💖</h1>
+    <div class="msg">🦊: วันนี้คุณว่างไหม</div>
+    <div class="msg fox">🐰: ....?</div>
+    <div class="msg">🦊: เป็นแฟนกันไหม 💖</div>
+    <button onclick="ok()">ตกลง</button>
+  </div>
 
-<!-- กระต่ายฟรุ้งฟริ้ง -->
-<div id="bunnyEffect" class="hidden">
-<img src="https://media.tenor.com/2roX3uxz_68AAAAM/cute-bunny.gif">
-<h2>🐰💖 คุณตอบตกลงแล้ว น้องดีใจมากกก 🦊✨</h2>
-</div>
+  <div class="container">
+    <div id="intro">🦊 Loading Love...</div>
+    <div id="main" class="hidden">
+      <h1>เป็นแฟนกับน้องนะ 💖</h1>
+      <button onclick="boom()">ตกลง</button>
+    </div>
+  </div>
+
+  <div id="flower-container"></div>
+
+  <div id="bunnyEffect" class="hidden">
+    <img src="https://media.tenor.com/2roX3uxz_68AAAAM/cute-bunny.gif" alt="bunny">
+    <h2>🐰💖 คุณตอบตกลงแล้ว น้องดีใจมากกก 🦊✨</h2>
+  </div>
+
+</div><!-- /mainSite -->
+
+<script>
+/* ===== ตั้งรหัสตรงนี้ ===== */
+const correctPassword = "bunnyfox123";
+
+/* ===== Envelope / Password Flow ===== */
+function openEnvelope(){
+  const env = document.getElementById("envelope");
+  env.classList.add("open");
+  setTimeout(()=>{
+    document.getElementById("introScreen").style.display="none";
+    document.getElementById("passwordScreen").classList.remove("hidden");
+  },900);
+}
+
+function checkPassword(){
+  const input = document.getElementById("passwordInput").value;
+  const bunny = document.getElementById("bunnyGuard");
+  if(input === correctPassword){
+    document.body.classList.add("successFlash");
+    createHeartBurst();
+    setTimeout(()=>{
+      document.getElementById("passwordScreen").style.display="none";
+      document.getElementById("mainSite").classList.remove("hidden");
+    },800);
+  }else{
+    document.getElementById("errorText").innerText="❌ รหัสผิดนะ 🐰 ลองอีกทีสิ";
+    bunny.classList.add("shake");
+    setTimeout(()=>bunny.classList.remove("shake"),400);
+  }
+}
+
+function createHeartBurst(){
+  for(let i=0;i<20;i++){
+    const h=document.createElement("div");
+    h.textContent="💖";
+    h.style.position="fixed";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    h.style.fontSize="30px";
+    h.style.zIndex="9999";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1000);
+  }
+}
+
+/* ===== Your features ===== */
+const story=[
+  "ตั้งแต่เจอคุณ 🐰 โลกน้องเปลี่ยนไปเลย",
+  "ทุกวันมันสดใสขึ้นแบบแปลกๆ",
+  "น้องเลยอยากถามว่า..."
+];
+let i=0;
+function nextStory(){
+  const d=document.getElementById("dialogue");
+  if(i<story.length){ d.innerText=story[i++]; }
+  else{ document.getElementById("finalChoice").classList.remove("hidden"); }
+}
+
+function accept(){
+  document.getElementById("bunnyEffect").classList.remove("hidden");
+}
+
+const noBtn=document.getElementById("noBtn");
+if(noBtn){
+  noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.transform=`translate(${Math.random()*160-80}px,${Math.random()*60-30}px)`;
+  });
+}
+
+function love(){
+  document.getElementById("result").innerHTML="🐰💖 เราเป็นแฟนกันแล้ววว 🦊";
+}
+function ok(){
+  alert("🐰💖 แฟนกันแล้วววว");
+}
+
+/* loading intro -> main */
+setTimeout(()=>{
+  const intro=document.getElementById("intro");
+  const main=document.getElementById("main");
+  if(intro && main){
+    intro.style.display="none";
+    main.classList.remove("hidden");
+  }
+},2000);
+
+function boom(){ createHeartBurst(); }
+</script>
+
+</body>
+</html>
