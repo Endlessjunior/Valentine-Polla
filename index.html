@@ -1,0 +1,74 @@
+<!-- ===== SUPER ENVELOPE INTRO ===== -->
+<div id="introScreen">
+
+<div id="guardian">🐰</div>
+
+<div id="envelope" onclick="openEnvelope()">
+<div class="flap"></div>
+<div class="letter">💌</div>
+</div>
+
+<p class="hint">มีจดหมายลับถึงคุณ... กดเปิดสิ 🦊</p>
+
+</div>
+
+<!-- ===== PASSWORD SCREEN ===== -->
+<div id="passwordScreen" class="hidden">
+
+<div id="bunnyGuard">🐰</div>
+
+<h2>🔐 ใส่รหัสเข้าสู่ระบบ </h2>
+<input id="passwordInput" placeholder="รหัสลับ..." />
+<button onclick="checkPassword()">ตกลง 💖</button>
+
+<p id="errorText"></p>
+
+</div>
+
+<!-- ===== MAIN WEBSITE WRAPPER ===== -->
+<div id="mainSite" class="hidden">
+<!-- 🔥 เอาเว็บวาเลนไทน์ทั้งหมดของจูเนียร์ใส่ไว้ในนี้ -->
+</div>
+<div class="container">
+<h1> ถึงพอลล่า 🐰</h1>
+
+<div id="dialogue">
+สวัสดีคุณ 🐰 วันนี้น้องมีอะไรอยากบอก...
+</div>
+
+<button onclick="nextStory()">ลองกดดูสิ ▶</button>
+
+<div id="finalChoice" class="hidden">
+<h2>เป็นแฟนกับน้องนะ 💖</h2>
+<button onclick="accept()">ตกลง</button>
+<button id="noBtn">ยังไม่ตกลง</button>
+</div>
+</div>
+<div class="chat">
+<div class="fox">🦊: คุณรู้ไหม...</div>
+<div class="bunny">🐰: ....?</div>
+<div class="fox">🦊: น้องชอบคุณนะ 💖</div>
+
+<button onclick="love()">ตกลง</button>
+<div id="result"></div>
+</div>
+<h1>เป็นแฟนกับน้องนะ 🌙💖</h1>
+<div class="phone">
+<div class="msg">🦊: วันนี้คุณว่างไหม</div>
+<div class="msg fox">🐰: ....? </div>
+<div class="msg">🦊: เป็นแฟนกันไหม 💖</div>
+<button onclick="ok()">ตกลง</button>
+</div>
+<div id="intro">🦊 Loading Love...</div>
+<div id="main" class="hidden">
+<h1>เป็นแฟนกับน้องนะ 💖</h1>
+<button onclick="boom()">ตกลง</button>
+</div>
+<!-- เอฟเฟกต์ดอกไม้ -->
+<div id="flower-container"></div>
+
+<!-- กระต่ายฟรุ้งฟริ้ง -->
+<div id="bunnyEffect" class="hidden">
+<img src="https://media.tenor.com/2roX3uxz_68AAAAM/cute-bunny.gif">
+<h2>🐰💖 คุณตอบตกลงแล้ว น้องดีใจมากกก 🦊✨</h2>
+</div>

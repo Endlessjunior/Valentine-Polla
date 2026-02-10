@@ -1,0 +1,168 @@
+#introScreen,#passwordScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ffd6e7,#ffeef6,#e8f7ff);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+text-align:center;
+font-family:sans-serif;
+}
+
+.hidden{display:none;}
+
+#envelope{
+position:relative;
+width:160px;
+height:110px;
+background:#ff9ec4;
+border-radius:10px;
+cursor:pointer;
+transition:.4s;
+}
+
+.flap{
+position:absolute;
+top:-55px;
+left:0;
+width:160px;
+height:55px;
+background:#ff7fb2;
+clip-path:polygon(0 100%,50% 0,100% 100%);
+transition:.5s;
+}
+
+.letter{
+font-size:40px;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100%;
+}
+
+.open .flap{
+transform:rotateX(160deg);
+}
+
+#guardian,#bunnyGuard{
+font-size:60px;
+margin-bottom:20px;
+transition:.3s;
+}
+
+.shake{
+animation:shake .4s;
+}
+
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-10px);}
+50%{transform:translateX(10px);}
+75%{transform:translateX(-10px);}
+100%{transform:translateX(0);}
+}
+
+.successFlash{
+animation:flash .6s;
+}
+
+@keyframes flash{
+0%{background:#fff;}
+50%{background:#ffd6e7;}
+100%{background:#fff;}
+}
+body{background:#ffd6e7;font-family:sans-serif;text-align:center;}
+.container{max-width:600px;margin:auto;padding:40px;}
+button{padding:10px 20px;border-radius:15px;border:none;margin:10px;}
+.hidden{display:none;}
+body{background:#ffe4f1;font-family:sans-serif}
+.chat{max-width:500px;margin:auto;padding:30px}
+.fox{text-align:right;background:#fff;padding:10px;margin:10px;border-radius:10px}
+.bunny{text-align:left;background:#ffd6e7;padding:10px;margin:10px;border-radius:10px}
+body{background:#1a0033;color:white;text-align:center;font-family:sans-serif}
+.star{position:fixed;color:white;animation:fall 3s linear}
+@keyframes fall{from{transform:translateY(-10vh);}to{transform:translateY(100vh);}}
+body{background:#ffc0d9;font-family:sans-serif}
+.phone{max-width:350px;margin:auto;background:white;padding:20px;border-radius:20px}
+.msg{background:#eee;padding:10px;margin:5px;border-radius:10px}
+.fox{background:#ffd6e7;text-align:right}
+body{text-align:center;background:#ffd6e7;font-family:sans-serif}
+.hidden{display:none}
+.heart{position:fixed;font-size:30px;animation:up 2s linear}
+@keyframes up{from{transform:translateY(100vh);}to{transform:translateY(-10vh);}}
+/* ===== ดอกไม้หล่น ===== */
+.flower{
+position:fixed;
+top:-10vh;
+font-size:24px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+/* ===== กระต่ายฟรุ้งฟริ้ง ===== */
+#bunnyEffect{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+animation:pop 0.4s ease;
+z-index:999;
+}
+
+#bunnyEffect img{
+width:180px;
+}
+
+@keyframes pop{
+from{transform:translate(-50%,-50%) scale(0);}
+to{transform:translate(-50%,-50%) scale(1);}
+}
+
+.hidden{
+display:none;
+}
+body{
+margin:0;
+font-family:sans-serif;
+background:linear-gradient(135deg,#ffd6e7,#ffe9f3,#e0f7ff);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+overflow-x:hidden;
+}
+
+/* gradient ไหลเบาๆ */
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* ฟองแสง */
+.bubble{
+position:fixed;
+width:120px;
+height:120px;
+background:rgba(255,255,255,0.2);
+border-radius:50%;
+filter:blur(20px);
+animation:float 15s infinite alternate;
+}
+
+@keyframes float{
+from{transform:translateY(-50px);}
+to{transform:translateY(50px);}
+}
