@@ -219,6 +219,26 @@ setTimeout(()=>{
 
 function boom(){ createHeartBurst(); }
 </script>
+<script>
+
+function openEnvelope(){
+document.getElementById("introScreen").style.display="none";
+document.getElementById("passwordScreen").classList.remove("hidden");
+}
+
+function checkPassword(){
+const input=document.getElementById("passwordInput").value.trim();
+const correct="bunnyfox"; // ← ตั้งรหัสตรงนี้
+
+if(input===correct){
+document.getElementById("passwordScreen").style.display="none";
+document.getElementById("mainSite").classList.remove("hidden");
+}else{
+document.getElementById("errorText").innerText="รหัสไม่ถูกนะคุณ 🐰";
+}
+}
+
+</script>
 
 </body>
 </html>
